@@ -564,10 +564,10 @@ PlayState.prototype.draw = function(game, dt, ctx) {
     }
 
     //  Draw bombs.
-    ctx.fillStyle = '#ff5555';
+    ctx.fillStyle = '#FFFF00';
     for(var i=0; i<this.bombs.length; i++) {
         var bomb = this.bombs[i];
-        ctx.fillRect(bomb.x - 2, bomb.y - 2, 4, 4);
+        ctx.fillRect(bomb.x - 2, bomb.y - 2, 8, 8);
     }
 
     //  Draw rockets.
