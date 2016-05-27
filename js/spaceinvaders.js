@@ -42,7 +42,8 @@ function Game() {
         invaderFiles: 10,
         shipSpeed: 120,
         levelDifficultyMultiplier: 0.2,
-        pointsPerInvader: 5
+        pointsPerInvader: 5,
+		pointsPerBomb: 2
     };
 
     //  All state is in the variables below.
@@ -346,9 +347,16 @@ PlayState.prototype.update = function(game, dt) {
     if(game.pressedKeys[37]) {
         this.ship.x -= this.shipSpeed * dt;
     }
+	if(game.pressedKeys[38]) {
+        this.ship.y -= this.shipSpeed * dt;
+    }
     if(game.pressedKeys[39]) {
         this.ship.x += this.shipSpeed * dt;
     }
+	if(game.pressedKeys[40]) {
+        this.ship.y += this.shipSpeed * dt;
+    }
+	
     if(game.pressedKeys[32]) {
         this.fireRocket();
     }
@@ -359,6 +367,12 @@ PlayState.prototype.update = function(game, dt) {
     }
     if(this.ship.x > game.gameBounds.right) {
         this.ship.x = game.gameBounds.right;
+    }
+	if(this.ship.y < this.invaders[0].y) {
+        this.ship.y = this.invaders[0].y;
+    }
+    if(this.ship.y > game.gameBounds.bottom) {
+        this.ship.y = game.gameBounds.bottom;
     }
 
     //  Move each bomb.
@@ -474,7 +488,7 @@ PlayState.prototype.update = function(game, dt) {
                 //  this rocket again.
                 this.rockets.splice(j--, 1);
                 bang = true;
-                game.score += this.config.pointsPerInvader;
+                game.score += this.config.pointsPerBomb;
                 break;
             }
         }
