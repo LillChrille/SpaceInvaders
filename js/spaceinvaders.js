@@ -40,9 +40,10 @@ function Game() {
         debugMode: false,
         invaderRanks: 5,
         invaderFiles: 10,
-        shipSpeed: 120,
+        shipSpeed: 250,
         levelDifficultyMultiplier: 0.2,
-        pointsPerInvader: 5
+        pointsPerInvader: 5,
+		pointsPerBomb: 2
     };
 
     //  All state is in the variables below.
@@ -346,9 +347,16 @@ PlayState.prototype.update = function(game, dt) {
     if(game.pressedKeys[37]) {
         this.ship.x -= this.shipSpeed * dt;
     }
+	if(game.pressedKeys[38]) {
+        this.ship.y -= this.shipSpeed * dt;
+    }
     if(game.pressedKeys[39]) {
         this.ship.x += this.shipSpeed * dt;
     }
+	if(game.pressedKeys[40]) {
+        this.ship.y += this.shipSpeed * dt;
+    }
+	
     if(game.pressedKeys[32]) {
         this.fireRocket();
     }
@@ -359,6 +367,12 @@ PlayState.prototype.update = function(game, dt) {
     }
     if(this.ship.x > game.gameBounds.right) {
         this.ship.x = game.gameBounds.right;
+    }
+	if(this.ship.y < this.invaders[0].y) {
+        this.ship.y = this.invaders[0].y;
+    }
+    if(this.ship.y > game.gameBounds.bottom) {
+        this.ship.y = game.gameBounds.bottom;
     }
 
     //  Move each bomb.
@@ -474,7 +488,7 @@ PlayState.prototype.update = function(game, dt) {
                 //  this rocket again.
                 this.rockets.splice(j--, 1);
                 bang = true;
-                game.score += this.config.pointsPerInvader;
+                game.score += this.config.pointsPerBomb;
                 break;
             }
         }
@@ -552,12 +566,7 @@ PlayState.prototype.draw = function(game, dt, ctx) {
     ctx.clearRect(0, 0, game.width, game.height);
     
     //  Draw ship.
-<<<<<<< HEAD
     ctx.fillStyle = '#00FFFF';
-=======
-    //ctx.fillStyle = '#999999';
-	ctx.fillStyle = '#'+333333*game.lives;
->>>>>>> cea9d83b0614eb652d31065918b0c3bcf3e437b6
     ctx.fillRect(this.ship.x - (this.ship.width / 2), this.ship.y - (this.ship.height / 2), this.ship.width, this.ship.height);
 
     //  Draw invaders.
