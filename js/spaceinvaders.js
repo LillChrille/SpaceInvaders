@@ -467,8 +467,8 @@ PlayState.prototype.update = function(game, dt) {
         for(var j=0; j<this.rockets.length; j++){
             var rocket = this.rockets[j];
 
-            if(rocket.x >= (bomb.x - 2) && rocket.x <= (bomb.x + 2) &&
-                rocket.y >= (bomb.y - 2) && rocket.y <= (bomb.y + 2)) {
+            if(rocket.x >= (bomb.x - 4) && rocket.x <= (bomb.x + 4) &&
+                rocket.y >= (bomb.y - 4) && rocket.y <= (bomb.y + 4)) {
 
                 //  Remove the rocket, set 'bang' so we don't process
                 //  this rocket again.
