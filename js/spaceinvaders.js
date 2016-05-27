@@ -217,7 +217,7 @@ WelcomeState.prototype.enter = function(game) {
     game.sounds.init();
     game.sounds.loadSound('shoot', 'sounds/shoot.wav');
     game.sounds.loadSound('bang', 'sounds/bang.wav');
-    game.sounds.loadSound('explosion', 'sounds/explosion.wav');
+    game.sounds.loadSound('explosion', 'sounds/chewieroar.wav');
 	game.sounds.loadSound('starwars', 'sounds/starwars.wav');
 };
 
