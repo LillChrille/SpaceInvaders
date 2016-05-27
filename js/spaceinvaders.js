@@ -40,7 +40,7 @@ function Game() {
         debugMode: false,
         invaderRanks: 5,
         invaderFiles: 10,
-        shipSpeed: 120,
+        shipSpeed: 250,
         levelDifficultyMultiplier: 0.2,
         pointsPerInvader: 5
     };
