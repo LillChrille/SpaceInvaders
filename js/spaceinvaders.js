@@ -457,8 +457,8 @@ PlayState.prototype.update = function(game, dt) {
         for(var j=0; j<this.rockets.length; j++){
             var rocket = this.rockets[j];
 
-            if(rocket.x >= (invader.x - invader.width/2) && rocket.x <= (invader.x + invader.width/2) &&
-                rocket.y >= (invader.y - invader.height/2) && rocket.y <= (invader.y + invader.height/2)) {
+            if((rocket.x + rocket.width/2) >= (invader.x - invader.width/2) && (rocket.x - rocket.width/2) <= (invader.x + invader.width/2) &&
+                (rocket.y + rocket.height/2) >= (invader.y - invader.height/2) && (rocket.y - rocket.height/2) <= (invader.y + invader.height/2)) {
                 
                 //  Remove the rocket, set 'bang' so we don't process
                 //  this rocket again.
@@ -483,8 +483,8 @@ PlayState.prototype.update = function(game, dt) {
         for(var j=0; j<this.rockets.length; j++){
             var rocket = this.rockets[j];
 
-            if(rocket.x >= (bomb.x - 4) && rocket.x <= (bomb.x + 4) &&
-                rocket.y >= (bomb.y - 4) && rocket.y <= (bomb.y + 4)) {
+            if((rocket.x + rocket.width/2) >= (bomb.x - 4) && (rocket.x - rocket.width/2) <= (bomb.x + 4) &&
+                (rocket.y + rocket.height/2)>= (bomb.y - 4) && (rocket.y - rocket.height/2) <= (bomb.y + 4)) {
 
                 //  Remove the rocket, set 'bang' so we don't process
                 //  this rocket again.
@@ -589,7 +589,7 @@ PlayState.prototype.draw = function(game, dt, ctx) {
     ctx.fillStyle = '#ff0000';
     for(var i=0; i<this.rockets.length; i++) {
         var rocket = this.rockets[i];
-        ctx.fillRect(rocket.x, rocket.y - 2, 1, 4);
+        ctx.fillRect(rocket.x - rocket.width/2, rocket.y - rocket.height/2, rocket.width, rocket.height);
     }
 
     //  Draw info.
@@ -741,6 +741,8 @@ function Rocket(x, y, velocity) {
     this.x = x;
     this.y = y;
     this.velocity = velocity;
+	this.width = 3;
+    this.height = 6;
 }
 
 /*
