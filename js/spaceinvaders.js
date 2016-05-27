@@ -218,6 +218,7 @@ WelcomeState.prototype.enter = function(game) {
     game.sounds.loadSound('shoot', 'sounds/shoot.wav');
     game.sounds.loadSound('bang', 'sounds/bang.wav');
     game.sounds.loadSound('explosion', 'sounds/explosion.wav');
+	game.sounds.loadSound('starwars', 'sounds/starwars.wav');
 };
 
 WelcomeState.prototype.update = function (game, dt) {
@@ -243,6 +244,7 @@ WelcomeState.prototype.draw = function(game, dt, ctx) {
 WelcomeState.prototype.keyDown = function(game, keyCode) {
     if(keyCode == 32) /*space*/ {
         //  Space starts the game.
+		game.sounds.playSound('starwars');
         game.level = 1;
         game.score = 0;
         game.lives = 3;
