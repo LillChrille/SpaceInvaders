@@ -26,7 +26,7 @@ function Game() {
 
     //  Set the initial config.
     this.config = {
-        bombRate: 0.05,
+        bombRate: 0.1,
         bombMinVelocity: 50,
         bombMaxVelocity: 50,
         invaderInitialVelocity: 25,
@@ -457,6 +457,32 @@ PlayState.prototype.update = function(game, dt) {
             game.sounds.playSound('bang');
         }
     }
+	
+	
+	//  Check for rocket/bomb collisions.
+    for(i=0; i<this.bombs.length; i++) {
+        var bomb = this.bombs[i];
+        var bang = false;
+
+        for(var j=0; j<this.rockets.length; j++){
+            var rocket = this.rockets[j];
+
+            if(rocket.x >= (bomb.x - 4) && rocket.x <= (bomb.x + 4) &&
+                rocket.y >= (bomb.y - 4) && rocket.y <= (bomb.y + 4)) {
+
+                //  Remove the rocket, set 'bang' so we don't process
+                //  this rocket again.
+                this.rockets.splice(j--, 1);
+                bang = true;
+                game.score += this.config.pointsPerInvader;
+                break;
+            }
+        }
+        if(bang) {
+            this.bombs.splice(i--, 1);
+            game.sounds.playSound('bang');
+        }
+    }
 
     //  Find all of the front rank invaders.
     var frontRankInvaders = {};
@@ -526,7 +552,12 @@ PlayState.prototype.draw = function(game, dt, ctx) {
     ctx.clearRect(0, 0, game.width, game.height);
     
     //  Draw ship.
-    ctx.fillStyle = '#999999';
+<<<<<<< HEAD
+    ctx.fillStyle = '#00FFFF';
+=======
+    //ctx.fillStyle = '#999999';
+	ctx.fillStyle = '#'+333333*game.lives;
+>>>>>>> cea9d83b0614eb652d31065918b0c3bcf3e437b6
     ctx.fillRect(this.ship.x - (this.ship.width / 2), this.ship.y - (this.ship.height / 2), this.ship.width, this.ship.height);
 
     //  Draw invaders.
@@ -537,10 +568,10 @@ PlayState.prototype.draw = function(game, dt, ctx) {
     }
 
     //  Draw bombs.
-    ctx.fillStyle = '#ff5555';
+    ctx.fillStyle = '#FFFF00';
     for(var i=0; i<this.bombs.length; i++) {
         var bomb = this.bombs[i];
-        ctx.fillRect(bomb.x - 2, bomb.y - 2, 4, 4);
+        ctx.fillRect(bomb.x - 2, bomb.y - 2, 8, 8);
     }
 
     //  Draw rockets.
@@ -685,8 +716,8 @@ LevelIntroState.prototype.draw = function(game, dt, ctx) {
 function Ship(x, y) {
     this.x = x;
     this.y = y;
-    this.width = 20;
-    this.height = 16;
+    this.width = 10;
+    this.height = 10;
 }
 
 /*
