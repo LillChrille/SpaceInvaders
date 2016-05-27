@@ -457,6 +457,32 @@ PlayState.prototype.update = function(game, dt) {
             game.sounds.playSound('bang');
         }
     }
+	
+	
+	//  Check for rocket/bomb collisions.
+    for(i=0; i<this.bombs.length; i++) {
+        var bomb = this.bombs[i];
+        var bang = false;
+
+        for(var j=0; j<this.rockets.length; j++){
+            var rocket = this.rockets[j];
+
+            if(rocket.x >= (bomb.x - 2) && rocket.x <= (bomb.x + 2) &&
+                rocket.y >= (bomb.y - 2) && rocket.y <= (bomb.y + 2)) {
+
+                //  Remove the rocket, set 'bang' so we don't process
+                //  this rocket again.
+                this.rockets.splice(j--, 1);
+                bang = true;
+                game.score += this.config.pointsPerInvader;
+                break;
+            }
+        }
+        if(bang) {
+            this.bombs.splice(i--, 1);
+            game.sounds.playSound('bang');
+        }
+    }
 
     //  Find all of the front rank invaders.
     var frontRankInvaders = {};
@@ -526,7 +552,8 @@ PlayState.prototype.draw = function(game, dt, ctx) {
     ctx.clearRect(0, 0, game.width, game.height);
     
     //  Draw ship.
-    ctx.fillStyle = '#999999';
+    //ctx.fillStyle = '#999999';
+	ctx.fillStyle = '#'+333333*game.lives;
     ctx.fillRect(this.ship.x - (this.ship.width / 2), this.ship.y - (this.ship.height / 2), this.ship.width, this.ship.height);
 
     //  Draw invaders.
