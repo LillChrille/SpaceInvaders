@@ -26,7 +26,7 @@ function Game() {
 
     //  Set the initial config.
     this.config = {
-        bombRate: 0.05,
+        bombRate: 0.1,
         bombMinVelocity: 50,
         bombMaxVelocity: 50,
         invaderInitialVelocity: 25,
@@ -40,7 +40,7 @@ function Game() {
         debugMode: false,
         invaderRanks: 5,
         invaderFiles: 10,
-        shipSpeed: 120,
+        shipSpeed: 250,
         levelDifficultyMultiplier: 0.2,
         pointsPerInvader: 5,
 		pointsPerBomb: 2
@@ -566,8 +566,12 @@ PlayState.prototype.draw = function(game, dt, ctx) {
     ctx.clearRect(0, 0, game.width, game.height);
     
     //  Draw ship.
+<<<<<<< HEAD
+    ctx.fillStyle = '#00FFFF';
+=======
     //ctx.fillStyle = '#999999';
 	ctx.fillStyle = '#'+333333*game.lives;
+>>>>>>> cea9d83b0614eb652d31065918b0c3bcf3e437b6
     ctx.fillRect(this.ship.x - (this.ship.width / 2), this.ship.y - (this.ship.height / 2), this.ship.width, this.ship.height);
 
     //  Draw invaders.
@@ -726,8 +730,8 @@ LevelIntroState.prototype.draw = function(game, dt, ctx) {
 function Ship(x, y) {
     this.x = x;
     this.y = y;
-    this.width = 20;
-    this.height = 16;
+    this.width = 10;
+    this.height = 10;
 }
 
 /*
